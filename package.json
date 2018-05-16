@@ -1,6 +1,6 @@
 {
   "name": "custody-probe",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Report the state of child processes to custody.",
   "main": "src/index.js",
   "scripts": {
