@@ -3,7 +3,7 @@ const { join: joinPath } = require('path');
 const { writeFileSync } = require('fs');
 
 // Keep these values in sync with those inside `custody`.
-const PROC_DIR = '/usr/local/var/custody/services';
+const PROC_DIR = process.env.CUSTODY_PROC_DIR || '/usr/local/var/custody/services';
 const STATEFILE_EXT = '.statefile';
 const STATES = {
   RUNNING: 'RUNNING',

@@ -53,6 +53,10 @@ v1.0.0 custody only has support for displaying one process' state (in addition t
 reports normally). If you add the probe to more processes within the same program, the states will
 overwrite each other.
 
+## Configuration
+
+By default, custody uses `/usr/local/var/custody` to store information and to enable probe->custody communication. You can override this directory by specifying the `CUSTODY_PROC_DIR` environment variable.
+
 ## Contributing
 
 We welcome bug reports and feature suggestions!
