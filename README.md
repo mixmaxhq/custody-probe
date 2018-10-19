@@ -32,7 +32,7 @@ modifications.
 ## Installation
 
 ```sh
-npm install --dev custody-probe
+npm install --dev @custody/probe
 ```
 
 ## Usage
