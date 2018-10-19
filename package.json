@@ -25,5 +25,9 @@
   "homepage": "https://github.com/mixmaxhq/custody-probe#readme",
   "dependencies": {
     "mkdirp": "^0.5.1"
+  },
+  "devDependencies": {
+    "eslint": "^5.7.0",
+    "eslint-config-mixmax": "^2.0.0"
   }
 }
