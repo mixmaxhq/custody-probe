@@ -3,7 +3,8 @@
 `supervisorctl status` reports the state of each process controlled by Supervisor: running, stopped,
 fatally crashed. However it does not display the state of _subprocesses_. This becomes a problem
 when using Supervisor for local development of microservices, where the processes launched by
-Supervisor are not the servers themselves but rather build processes, which in turn launch the servers. The process tree might look something like this:
+Supervisor are not the servers themselves but rather build processes, which in turn launch the servers.
+The process tree might look something like this:
 
 ```
 supervisord
@@ -55,7 +56,8 @@ overwrite each other.
 
 ## Configuration
 
-By default, custody uses `/usr/local/var/custody` to store information and to enable probe->custody communication. You can override this directory by specifying the `CUSTODY_PROC_DIR` environment variable.
+By default, custody uses `/usr/local/var/custody` to store information and to enable probe->custody
+communication. You can override this directory by specifying the `CUSTODY_PROC_DIR` environment variable.
 
 ## Contributing
 
