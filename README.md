@@ -25,6 +25,10 @@ require('custody-probe')('app');
 Now if the "app" webserver crashes, custody will report "app" in state "FATAL" and will only switch
 back to "RUNNING" when the webserver comes back up.
 
+custody-probe will also, by default, reconfigure certain aspects of Node to work better in a
+multi-process environment; see [Configuration](#configuration) for more details and to disable these
+modifications.
+
 ## Installation
 
 ```sh
@@ -56,9 +60,40 @@ overwrite each other.
 
 ## Configuration
 
+### Communication with custody
+
 By default, custody uses `/usr/local/var/custody` to store information and to enable probe->custody
 communication. You can override this directory by specifying the `CUSTODY_PROC_DIR` environment variable.
+
+### Process modifications
+
+custody-probe will also, by default, reconfigure the following aspects of Node to work better in a
+multi-process environment i.e. if you're using Supervisor to manage multiple microservices.
+
+#### Debugger support
+
+Users can start [the Node debugger] by starting a process with the `inspect` argument or `--inspect`
+flag. If they can't or don't wish to restart a running process, they can start the debugger by
+signalling the process with [`'SIGUSR1'`]. This method is particularly useful when using Supervisor,
+because Supervisor controls process lifecycles.
+
+However, Node will in this latter case always start the debugger on the same port. This prevents
+users from debugging multiple processes simultaneously. To fix this, custody-probe overrides
+`'SIGUSR1'` to start the debugger on a dynamic port.
+
+The one downside of dynamic port assignment is that `chrome://inspect` by default only monitors
+9222 and 9229 for new connections, though you can change this by clicking "Configure" next to
+"Discover Network Targets".
+
+If you wish to preserve the default port when sending `'SIGUSR1'`, you can set
+the `CUSTODY_CHOOSE_DEBUG_PORT_DYNAMICALLY` environment variable to "false".
+
+Users will be able to use a static port when using the `inspect` argument or `--inspect` flag,
+regardless of the value of `CUSTODY_CHOOSE_DEBUG_PORT_DYNAMICALLY`.
 
 ## Contributing
 
 We welcome bug reports and feature suggestions!
+
+[the Node debugger]: https://nodejs.org/api/debugger.html
+[`'SIGUSR1'`]: https://nodejs.org/api/process.html#process_signal_events
