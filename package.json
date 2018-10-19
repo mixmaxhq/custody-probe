@@ -1,5 +1,5 @@
 {
-  "name": "custody-probe",
+  "name": "@custody/probe",
   "version": "0.2.0",
   "description": "Report the state of child processes to custody.",
   "main": "src/index.js",

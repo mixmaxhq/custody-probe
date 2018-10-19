@@ -19,7 +19,7 @@ If you're using [custody](https://github.com/mixmaxhq/custody) as a front-end to
 can fix this by adding a single line of code to your webserver:
 
 ```js
-require('custody-probe')('app');
+require('@custody/probe')('app');
 ```
 
 Now if the "app" webserver crashes, custody will report "app" in state "FATAL" and will only switch
@@ -39,7 +39,7 @@ npm install --dev custody-probe
 
 ```js
 if (process.env.NODE_ENV === 'development') {
-  require('custody-probe')('NAME_OF_PROGRAM');
+  require('@custody/probe')('NAME_OF_PROGRAM');
 }
 ```
 
