@@ -8,7 +8,7 @@ const PROC_DIR = process.env.CUSTODY_PROC_DIR || '/usr/local/var/custody/service
 const STATEFILE_EXT = '.statefile';
 const STATES = {
   RUNNING: 'RUNNING',
-  FATAL: 'FATAL'
+  FATAL: 'FATAL',
 };
 
 /**
@@ -26,12 +26,15 @@ module.exports = function initializeProbe(name) {
   function updateState(state = STATES.RUNNING, description = '') {
     const statefile = `${name}${STATEFILE_EXT}`;
     const path = joinPath(PROC_DIR, statefile);
-    writeFileSync(path, JSON.stringify({
-      pid: process.pid,
-      state,
-      description,
-      inspectorUrl: inspector.url()
-    }));
+    writeFileSync(
+      path,
+      JSON.stringify({
+        pid: process.pid,
+        state,
+        description,
+        inspectorUrl: inspector.url(),
+      })
+    );
   }
 
   // Mark the process as running on startup.
@@ -54,7 +57,8 @@ module.exports = function initializeProbe(name) {
 
     // 0 means choose a port dynamically:
     // https://github.com/nodejs/node/issues/16872#issuecomment-345079160
-    const chooseDebugPortDynamically = process.env.CUSTODY_CHOOSE_DEBUG_PORT_DYNAMICALLY !== 'false';
+    const chooseDebugPortDynamically =
+      process.env.CUSTODY_CHOOSE_DEBUG_PORT_DYNAMICALLY !== 'false';
     inspector.open(chooseDebugPortDynamically ? 0 : process.debugPort);
 
     // Communicate the inspector URL to `@custody/plugin-command-start-debugger`.

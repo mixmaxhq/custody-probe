@@ -4,6 +4,8 @@
   "description": "Report the state of child processes to custody.",
   "main": "src/index.js",
   "scripts": {
+    "ci": "npm run lint",
+    "lint": "eslint .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -27,7 +29,9 @@
     "mkdirp": "^0.5.1"
   },
   "devDependencies": {
-    "eslint": "^5.7.0",
-    "eslint-config-mixmax": "^2.0.0"
+    "@mixmaxhq/prettier-config": "^1.0.0",
+    "eslint": "^6.8.0",
+    "eslint-config-mixmax": "^4.6.0",
+    "prettier": "^1.19.1"
   }
 }
